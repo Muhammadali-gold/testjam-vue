@@ -1,0 +1,9 @@
+backend:
+  host: "localhost:8085"
+  apis:
+    - api:
+        url: "api/question"
+        method: post
+        body:
+          type: JSONObject
+          example: "save_qeustion.json"

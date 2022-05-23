@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import MenuItem from "@/components/MenuItem";
+import MenuItem from "@/components/menu/menuitem/MenuItem";
 
 export default {
   name: 'LeftMenu',

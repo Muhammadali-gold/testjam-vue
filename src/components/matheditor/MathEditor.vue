@@ -1,26 +1,37 @@
 <template>
-  <div class="navbar">
-    <div class="project-name">{{ project }}</div>
-    <div class="logout">
-      <ui-button @click="logout" raised>Logout</ui-button>
-    </div>
+  <div class="math-editor">
+    <h1>Editor</h1>
+    <math-field
+        @focus="ping"
+        :on-keystroke="displayKeystroke"
+        v-model="formula"
+    >
+      f(x)=
+    </math-field>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Nav-bar',
+  name: 'Math-editor',
   data () {
     return {
-      project: "UnLimited Space"
+      formula:""
     }
   },
   methods: {
-    logout () {
-      console.log('logout')
+    ping (){
+      console.log('pong')
+    },
+    displayKeystroke($event){
+      console.log($event)
     }
+  },
+  watch: {
+
   }
 }
+
 </script>
 
 <style scoped>

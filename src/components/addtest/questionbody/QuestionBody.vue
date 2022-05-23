@@ -1,70 +1,104 @@
 <template>
   <div class="write-body">
     <p>Savol Matni</p>
-    <ui-tab-bar v-model="local_active_tab">
-      <ui-tab content-indicator>
-        HTML
-      </ui-tab>
-      <ui-tab content-indicator disabled>
-        CSS
-      </ui-tab>
-    </ui-tab-bar>
-    <div class="html-editor" v-if="local_active_tab === 0">
-      <codemirror
-          v-model="local_html_code"
-          placeholder="Code gose here..."
-          :style="{ height: '400px' }"
-          :autofocus="true"
-          :indent-with-tab="true"
-          :tabSize="2"
-          :extensions="html_extensions"
-          @ready="log"
-          @change="setHtml(local_html_code)"
-          @focus="log"
-          @blur="log"
-      />
+    <p>
+<!--      <ui-switch-->
+<!--          v-model="editor_mode_bool"-->
+<!--          input-id="basic-switch"-->
+<!--        >-->
+<!--      </ui-switch>-->
+<!--      <span class="editor-label">{{editor_mode}}</span>-->
+    </p>
+    <div class="editor-developer-mode" v-if="editor_mode === 'DEVELOPER'">
+      <ui-tab-bar v-model="active_tab">
+        <ui-tab content-indicator>
+          HTML
+        </ui-tab>
+        <ui-tab content-indicator disabled>
+          CSS
+        </ui-tab>
+      </ui-tab-bar>
+      <div class="html-editor" v-if="active_tab === 0">
+        <codemirror
+            v-model="html_code"
+            placeholder="Code gose here..."
+            :style="{ height: '400px' }"
+            :indent-with-tab="true"
+            :tabSize="2"
+            :extensions="html_extensions"
+        />
+      </div>
+      <div class="css-editor" v-if="active_tab === 1">
+        <codemirror
+            v-model="css_code"
+            placeholder="Code gose here..."
+            :style="{ height: '400px' }"
+            :indent-with-tab="true"
+            :tabSize="2"
+            :extensions="css_extensions"
+        />
+      </div>
     </div>
-    <div class="css-editor" v-if="local_active_tab === 1">
-      <codemirror
-          v-model="local_css_code"
-          placeholder="Code gose here..."
-          :style="{ height: '400px' }"
-          :autofocus="true"
-          :indent-with-tab="true"
-          :tabSize="2"
-          :extensions="css_extensions"
-          @ready="log('ready', $event)"
-          @change="setCss(local_css_code)"
-          @focus="log('focus', $event)"
-          @blur="log('blur', $event)"
-      />
+    <div class="editor-teacher-mode" v-else>
+      <ui-editor v-model="editor_content" class="editor-teacher"></ui-editor>
     </div>
+
   </div>
 </template>
 <script>
+import { Codemirror } from 'vue-codemirror'
+
+import {html} from '@codemirror/lang-html'
+import {css} from '@codemirror/lang-css'
+
+const html_extensions = [html()]
+const css_extensions = [css()]
+
 export default {
   name: 'QuestionBody',
-  props: {
-    set_active_tab: {},
-    css_code: {},
-    css_extensions: {},
-    html_code: {},
-    html_extensions: {},
-    log: {},
-    setHtml:{},
-    setCss:{}
-  },
+  components: {Codemirror},
+  props: {},
   data () {
      return {
-       local_active_tab:0,
-       local_css_code: "",
-       local_html_code: "",
+       active_tab:0,
+       css_code: "",
+       html_code: "",
+       editor_mode:"TEACHER",
+       editor_content:"",
+       editor_mode_bool:true,
+       html_extensions,
+       css_extensions
      }
   },
-  watch: {
-    local_active_tab(){
-      this.set_active_tab(this.local_active_tab)
+  methods: {
+    log(value){
+      console.log(value)
     }
+  },
+  watch: {
+    editor_mode_bool(value){
+      if (value){
+        this.editor_mode = 'TEACHER'
+        this.html_code = ''
+      } else {
+        this.editor_mode = 'DEVELOPER'
+      }
+    },
+    html_code(value){
+      this.$store.state.html_code = value
+    },
+    css_code(value){
+      this.$store.state.css_code = value
+    },
   },
 }
 </script>
+
+<style scoped>
+.editor-label {
+  margin-left: 10px;
+}
+
+.editor-teacher {
+}
+</style>

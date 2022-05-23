@@ -7,21 +7,23 @@
         <AddTest v-if="selectedMenu.id === 1" />
         <StartTest v-if="selectedMenu.id === 2" />
         <TestTable v-if="selectedMenu.id === 3" />
+        <MathEditor v-if="selectedMenu.id === 4" />
       </section>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
-import LeftMenu from "@/components/LeftMenu";
-import AddTest from "@/components/AddTest";
-import StartTest from "@/components/StartTest";
-import TestTable from "@/components/TestTable";
+import Navbar from "@/components/navbar/Navbar";
+import LeftMenu from "@/components/menu/LeftMenu";
+import AddTest from "@/components/addtest/AddTest";
+import StartTest from "@/components/starttest/StartTest";
+import TestTable from "@/components/testtable/TestTable";
+import MathEditor from "@/components/matheditor/MathEditor";
 
 export default {
   name: 'Test-jam',
-  components: {TestTable,StartTest,AddTest, LeftMenu, Navbar},
+  components: {TestTable,StartTest,AddTest, LeftMenu, Navbar,MathEditor},
   props: {
     msg: String
   },
@@ -43,7 +45,11 @@ export default {
             id:3,
             name: "Test table",
             selected:false,
-          }
+          },{
+            id:4,
+            name: "Editor",
+            selected:false,
+          },
         ]
     }
   },

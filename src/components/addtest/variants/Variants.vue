@@ -1,38 +1,52 @@
 <template>
   <div class="left-section">
-    <div class="header">Test kiritish</div>
-    <SelectCategory/>
-    <ui-divider class="divider"></ui-divider>
-    <QuestionBody/>
-    <ui-divider class="divider"></ui-divider>
-    <ParaMeters />
-    <ui-divider class="divider"></ui-divider>
-    <Variants />
-    <ui-divider class="divider"></ui-divider>
-    <Solution />
-    <ui-divider class="divider"></ui-divider>
+    <p>Variantlar</p>
+    <div class="vars">
+      <div class="var">
+        <div class="editor">
+          <ui-editor v-model="variant_v1" class="editor-teacher"></ui-editor>
+        </div>
+      </div>
+      <div class="var">
+        <div class="editor">
+          <ui-editor v-model="variant_v2" class="editor-teacher"></ui-editor>
+        </div>
+      </div>
+      <div class="var">
+        <div class="editor">
+          <ui-editor v-model="variant_v3" class="editor-teacher"></ui-editor>
+        </div>
+      </div>
+      <div class="var">
+        <div class="editor">
+          <ui-editor v-model="variant_v4" class="editor-teacher"></ui-editor>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import ParaMeters from "@/components/addtest/parameter/ParaMeters"
-import QuestionBody from "@/components/addtest/questionbody/QuestionBody"
-import SelectCategory from "@/components/addtest/selectcategory/SelectCategory"
 
 export default {
-  name: 'Variants',
-  components: {ParaMeters, QuestionBody, SelectCategory,Variants,Solution},
+  name: 'Var-iants',
+  components: {},
   props: {
   },
-  methods : {}
+  methods : {},
+  data () {
+    return {
+      variant_v1:"",
+      variant_v2:"",
+      variant_v3:"",
+      variant_v4:"",
+    }
+  }
+
 }
 </script>
 
 <style scoped>
-.left-section {
-  width:100%;
-}
-.divider {
+.var {
   margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 </style>

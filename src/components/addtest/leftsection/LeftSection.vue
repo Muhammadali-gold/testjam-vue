@@ -1,45 +1,40 @@
 <template>
   <div class="left-section">
     <div class="header">Test kiritish</div>
-    <SelectCategory :class_grade_options="class_grade_options" :group_options="group_options"
-                    :subject_options="subject_options" :set_test_class_grade="set_test_class_grade"
-                    :set_test_group="set_test_group"
-                    :set_test_subject="set_test_subject" :set_test_theme="set_test_theme"
-                    :theme_options="theme_options"/>
-    <ui-divider></ui-divider>
-    <QuestionBody :set-css="setCss" :set-html="setHtml" :css_extensions="css_extensions"
-                  :html_code="html_code" :html_extensions="html_extensions" :log="log"/>
-    <ui-divider></ui-divider>
-    <ParaMeters :log="log" :test_params="test_params" :test_params_tbody="test_params_tbody"
-                :test_params_thead="test_params_thead"/>
+    <SelectCategory/>
+    <ui-divider class="divider"></ui-divider>
+    <QuestionBody/>
+    <ui-divider class="divider"></ui-divider>
+    <ParaMeters />
+    <ui-divider class="divider"></ui-divider>
+    <Variants />
+    <ui-divider class="divider"></ui-divider>
+    <Solution />
+    <ui-divider class="divider"></ui-divider>
   </div>
 </template>
 <script>
 import ParaMeters from "@/components/addtest/parameter/ParaMeters"
 import QuestionBody from "@/components/addtest/questionbody/QuestionBody"
 import SelectCategory from "@/components/addtest/selectcategory/SelectCategory"
+import Solution from "@/components/addtest/solution/Solution"
+import Variants from "@/components/addtest/variants/Variants"
 
 export default {
   name: 'LeftSection',
-  components: {ParaMeters, QuestionBody, SelectCategory},
+  components: {ParaMeters, QuestionBody, SelectCategory,Variants,Solution},
   props: {
-    class_grade_options: {},
-    css_extensions: {},
-    group_options: {},
-    html_code: {},
-    html_extensions: {},
-    log: {},
-    setCss: {},
-    setHtml: {},
-    set_test_class_grade: {},
-    set_test_group: {},
-    set_test_subject: {},
-    set_test_theme: {},
-    subject_options: {},
-    test_params: {},
-    test_params_tbody: {},
-    test_params_thead: {},
-    theme_options: {}
-  }
+  },
+  methods : {}
 }
 </script>
+
+<style scoped>
+.left-section {
+  width:100%;
+}
+.divider {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+</style>
